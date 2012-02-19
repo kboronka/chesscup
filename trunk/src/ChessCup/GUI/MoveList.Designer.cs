@@ -46,7 +46,10 @@ namespace ChessCup.GUI
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.list = new System.Windows.Forms.ListBox();
+			this.list = new System.Windows.Forms.ListView();
+			this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
+			this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
+			this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
 			this.previous = new System.Windows.Forms.Button();
 			this.first = new System.Windows.Forms.Button();
 			this.last = new System.Windows.Forms.Button();
@@ -58,57 +61,81 @@ namespace ChessCup.GUI
 			this.list.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
 									| System.Windows.Forms.AnchorStyles.Left) 
 									| System.Windows.Forms.AnchorStyles.Right)));
-			this.list.FormattingEnabled = true;
+			this.list.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.list.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+									this.columnHeader1,
+									this.columnHeader2,
+									this.columnHeader3});
+			this.list.FullRowSelect = true;
+			this.list.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+			this.list.HideSelection = false;
 			this.list.Location = new System.Drawing.Point(0, 0);
-			this.list.MultiColumn = true;
+			this.list.MultiSelect = false;
 			this.list.Name = "list";
-			this.list.SelectionMode = System.Windows.Forms.SelectionMode.None;
-			this.list.Size = new System.Drawing.Size(138, 147);
+			this.list.Size = new System.Drawing.Size(120, 352);
 			this.list.TabIndex = 0;
+			this.list.UseCompatibleStateImageBehavior = false;
+			this.list.View = System.Windows.Forms.View.Details;
+			// 
+			// columnHeader1
+			// 
+			this.columnHeader1.Width = 23;
+			// 
+			// columnHeader2
+			// 
+			this.columnHeader2.Width = 42;
+			// 
+			// columnHeader3
+			// 
+			this.columnHeader3.Width = 42;
 			// 
 			// previous
 			// 
 			this.previous.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.previous.Enabled = false;
-			this.previous.Location = new System.Drawing.Point(31, 152);
+			this.previous.Location = new System.Drawing.Point(31, 325);
 			this.previous.Name = "previous";
 			this.previous.Size = new System.Drawing.Size(23, 23);
 			this.previous.TabIndex = 5;
 			this.previous.Text = "<";
 			this.previous.UseVisualStyleBackColor = true;
+			this.previous.Visible = false;
 			// 
 			// first
 			// 
 			this.first.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.first.Enabled = false;
-			this.first.Location = new System.Drawing.Point(2, 152);
+			this.first.Location = new System.Drawing.Point(2, 325);
 			this.first.Name = "first";
 			this.first.Size = new System.Drawing.Size(23, 23);
 			this.first.TabIndex = 4;
 			this.first.Text = "|<";
 			this.first.UseVisualStyleBackColor = true;
+			this.first.Visible = false;
 			// 
 			// last
 			// 
 			this.last.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.last.Enabled = false;
-			this.last.Location = new System.Drawing.Point(111, 152);
+			this.last.Location = new System.Drawing.Point(93, 325);
 			this.last.Name = "last";
 			this.last.Size = new System.Drawing.Size(23, 23);
 			this.last.TabIndex = 7;
 			this.last.Text = ">|";
 			this.last.UseVisualStyleBackColor = true;
+			this.last.Visible = false;
 			// 
 			// next
 			// 
 			this.next.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.next.Enabled = false;
-			this.next.Location = new System.Drawing.Point(82, 152);
+			this.next.Location = new System.Drawing.Point(64, 325);
 			this.next.Name = "next";
 			this.next.Size = new System.Drawing.Size(23, 23);
 			this.next.TabIndex = 6;
 			this.next.Text = ">";
 			this.next.UseVisualStyleBackColor = true;
+			this.next.Visible = false;
 			// 
 			// MoveList
 			// 
@@ -121,13 +148,16 @@ namespace ChessCup.GUI
 			this.Controls.Add(this.list);
 			this.MinimumSize = new System.Drawing.Size(115, 100);
 			this.Name = "MoveList";
-			this.Size = new System.Drawing.Size(138, 179);
+			this.Size = new System.Drawing.Size(120, 352);
 			this.ResumeLayout(false);
 		}
+		private System.Windows.Forms.ColumnHeader columnHeader3;
+		private System.Windows.Forms.ColumnHeader columnHeader2;
+		private System.Windows.Forms.ColumnHeader columnHeader1;
 		private System.Windows.Forms.Button next;
 		private System.Windows.Forms.Button last;
 		private System.Windows.Forms.Button first;
 		private System.Windows.Forms.Button previous;
-		private System.Windows.Forms.ListBox list;
+		private System.Windows.Forms.ListView list;
 	}
 }

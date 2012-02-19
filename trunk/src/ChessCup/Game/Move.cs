@@ -44,8 +44,8 @@ namespace ChessCup.Game
 			if ((unit & Constants.MASK_TYPE) == Constants.KING)
 			{
 				// castle king side
-				if (to == (from - 2)) this.move = "0-0";
-				if (to == (from + 2)) this.move = "0-0-0";
+				if (to == (from - 2)) this.move = "0-0-0";
+				if (to == (from + 2)) this.move = "0-0";
 			}
 			
 			if (String.IsNullOrEmpty(this.move))

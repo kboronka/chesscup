@@ -48,7 +48,6 @@ namespace ChessCup
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.board = new ChessCup.GUI.Board();
-			this.moveList = new System.Windows.Forms.ListBox();
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.turnStatus = new System.Windows.Forms.ToolStripStatusLabel();
 			this.scoreStatus = new System.Windows.Forms.ToolStripStatusLabel();
@@ -71,6 +70,7 @@ namespace ChessCup
 			this.label6 = new System.Windows.Forms.Label();
 			this.label7 = new System.Windows.Forms.Label();
 			this.label8 = new System.Windows.Forms.Label();
+			this.moveList1 = new ChessCup.GUI.MoveList();
 			this.statusStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -81,19 +81,8 @@ namespace ChessCup
 			this.board.Location = new System.Drawing.Point(9, 9);
 			this.board.Margin = new System.Windows.Forms.Padding(0);
 			this.board.Name = "board";
-			this.board.Size = new System.Drawing.Size(396, 352);
+			this.board.Size = new System.Drawing.Size(352, 352);
 			this.board.TabIndex = 0;
-			// 
-			// moveList
-			// 
-			this.moveList.FormattingEnabled = true;
-			this.moveList.IntegralHeight = false;
-			this.moveList.Location = new System.Drawing.Point(408, 9);
-			this.moveList.MultiColumn = true;
-			this.moveList.Name = "moveList";
-			this.moveList.SelectionMode = System.Windows.Forms.SelectionMode.None;
-			this.moveList.Size = new System.Drawing.Size(120, 352);
-			this.moveList.TabIndex = 1;
 			// 
 			// statusStrip1
 			// 
@@ -306,11 +295,20 @@ namespace ChessCup
 			this.label8.TabIndex = 19;
 			this.label8.Text = "7";
 			// 
+			// moveList1
+			// 
+			this.moveList1.Location = new System.Drawing.Point(381, 9);
+			this.moveList1.MinimumSize = new System.Drawing.Size(115, 100);
+			this.moveList1.Name = "moveList1";
+			this.moveList1.Size = new System.Drawing.Size(147, 352);
+			this.moveList1.TabIndex = 21;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(531, 421);
+			this.Controls.Add(this.moveList1);
 			this.Controls.Add(this.h);
 			this.Controls.Add(this.g);
 			this.Controls.Add(this.f);
@@ -322,7 +320,6 @@ namespace ChessCup
 			this.Controls.Add(this.loadFEN);
 			this.Controls.Add(this.fen);
 			this.Controls.Add(this.statusStrip1);
-			this.Controls.Add(this.moveList);
 			this.Controls.Add(this.board);
 			this.Controls.Add(this.label7);
 			this.Controls.Add(this.label8);
@@ -343,6 +340,7 @@ namespace ChessCup
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}
+		private ChessCup.GUI.MoveList moveList1;
 		private System.Windows.Forms.Label label8;
 		private System.Windows.Forms.Label label7;
 		private System.Windows.Forms.Label label6;
@@ -365,7 +363,6 @@ namespace ChessCup
 		private System.Windows.Forms.ToolStripStatusLabel turnStatus;
 		private System.Windows.Forms.ToolStripStatusLabel copyrightStatus;
 		private System.Windows.Forms.StatusStrip statusStrip1;
-		private System.Windows.Forms.ListBox moveList;
 		private ChessCup.GUI.Board board;
 	}
 }

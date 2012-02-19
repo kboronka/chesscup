@@ -151,6 +151,14 @@ namespace ChessCup.GUI
 			{
 				previousSelectedSquare = selectedPiece;
 				selectedPiece.Selected = true;
+				
+				Program.Log("Selected: " + selectedPiece.ID);
+				
+				foreach (Move move in this.engine.availbleMoves.FindAll(delegate(Move m) { return (m.From == selectedPiece.ID); }))
+				{
+					Program.Log(move.ToString());
+				}
+					
 				return;
 			}
 			
@@ -159,6 +167,7 @@ namespace ChessCup.GUI
 				// is current move legal?
 				if (this.engine.availbleMoves.Find(delegate(Move m) { return (m.From == previousSelectedSquare.ID && m.To == selectedPiece.ID); }) != null)
 				{
+					/*
 					if (selectedPiece.Unit != Constants.EMPTY)
 					{
 						if ((selectedPiece.Unit & Constants.BLACK) > 0)
@@ -170,6 +179,7 @@ namespace ChessCup.GUI
 							this.prisonersOfWarBlack.AddDeadMan(selectedPiece.Unit);
 						}
 					}
+					*/
 
 					this.engine.MovePiece(this.previousSelectedSquare.ID, selectedPiece.ID);
 					this.UpdateBoardArray();

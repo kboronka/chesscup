@@ -316,7 +316,7 @@ namespace ChessCup.Game
 			bool capture = (units[to] != Constants.EMPTY) || (((units[from] & Constants.MASK_TYPE) == Constants.PAWN) && ((Math.Abs(from - to) % 2) != 0));
 			this.moves.Add(new Move(this.units[from], from, to, capture));
 
-			Engine.MovePiece(ref this.units, from, to);
+			this.units = Engine.MovePiece(this.units, from, to);
 			this.availbleMoves = Engine.UpdateMoveLists(this.units);
 
 			this.halfMoveClock++;
@@ -331,51 +331,59 @@ namespace ChessCup.Game
 			}
 		}
 		
-		public static void MovePiece(ref byte[] units, byte from, byte to)
+		public static byte[] MovePiece(byte[] units, byte from, byte to)
 		{
-			if ((units[from] & Constants.MASK_TYPE) == Constants.KING)
+			byte[] results = new byte[64];
+			
+			for (byte i = 0; i < 64; i++)
+			{
+				results[i] = units[i];
+			}
+			
+			
+			if ((results[from] & Constants.MASK_TYPE) == Constants.KING)
 			{
 				// castle king side
 				if (to == (from + 2))
 				{
-					units[from + 1] = units[from + 3];
-					units[from + 3] = Constants.EMPTY;
+					results[from + 1] = results[from + 3];
+					results[from + 3] = Constants.EMPTY;
 				}
 
 				// castle queen side
 				if (to == (from - 2))
 				{
-					units[from - 1] = units[from - 4];
-					units[from - 4] = Constants.EMPTY;
+					results[from - 1] = results[from - 4];
+					results[from - 4] = Constants.EMPTY;
 				}
 				
 				// remove CASTLING status
-				if ((units[from] & Constants.MASK_COLOUR) == Constants.WHITE)
+				if ((results[from] & Constants.MASK_COLOUR) == Constants.WHITE)
 				{
-					if ((units[56] & Constants.CASTLING) == Constants.CASTLING) units[56] ^= Constants.CASTLING;
-					if ((units[63] & Constants.CASTLING) == Constants.CASTLING) units[63] ^= Constants.CASTLING;
+					if ((results[56] & Constants.CASTLING) == Constants.CASTLING) results[56] ^= Constants.CASTLING;
+					if ((results[63] & Constants.CASTLING) == Constants.CASTLING) results[63] ^= Constants.CASTLING;
 				}
 				else
 				{
-					if ((units[0] & Constants.CASTLING) == Constants.CASTLING) units[0] ^= Constants.CASTLING;
-					if ((units[7] & Constants.CASTLING) == Constants.CASTLING) units[7] ^= Constants.CASTLING;					
+					if ((results[0] & Constants.CASTLING) == Constants.CASTLING) results[0] ^= Constants.CASTLING;
+					if ((results[7] & Constants.CASTLING) == Constants.CASTLING) results[7] ^= Constants.CASTLING;					
 				}
 			}
 			
-			if ((units[from] & Constants.MASK_TYPE) == Constants.ROOK)
+			if ((results[from] & Constants.MASK_TYPE) == Constants.ROOK)
 			{
 				// remove CASTLING status
-				if ((units[from] & Constants.CASTLING) == Constants.CASTLING) units[from] ^= Constants.CASTLING;
+				if ((results[from] & Constants.CASTLING) == Constants.CASTLING) results[from] ^= Constants.CASTLING;
 			}
 			
 			// capture en passant pawn
-			if ((units[from] & Constants.MASK_TYPE) == Constants.PAWN)
+			if ((results[from] & Constants.MASK_TYPE) == Constants.PAWN)
 			{
-				if (units[to] == Constants.EN_PASSANT)
+				if (results[to] == Constants.EN_PASSANT)
 				{
 					int enPassant;
 					
-					if ((units[from] & Constants.MASK_COLOUR) == Constants.WHITE)
+					if ((results[from] & Constants.MASK_COLOUR) == Constants.WHITE)
 					{
 						enPassant = to - Constants.FORWARD;
 					}
@@ -384,38 +392,40 @@ namespace ChessCup.Game
 						enPassant = to - Constants.REVERSE;
 					}
 					
-					units[enPassant] = Constants.EMPTY;
+					results[enPassant] = Constants.EMPTY;
 				}
 			}
 			
 			// reset en passant status
 			for (int i = 0; i < 64; i++)
 			{
-				if ((units[i] & Constants.EN_PASSANT) == Constants.EN_PASSANT)
+				if ((results[i] & Constants.EN_PASSANT) == Constants.EN_PASSANT)
 				{
-					units[i] ^= Constants.EN_PASSANT;
+					results[i] ^= Constants.EN_PASSANT;
 				}
 			}
 			
 			// move unit (and/or capture)
-			units[to] = units[from];
-			units[from] = Constants.EMPTY;
+			results[to] = results[from];
+			results[from] = Constants.EMPTY;
 
 			// set en passant status
-			if (((units[to] & Constants.MASK_TYPE) == Constants.PAWN) && (Math.Abs(from - to) == 16))
+			if (((results[to] & Constants.MASK_TYPE) == Constants.PAWN) && (Math.Abs(from - to) == 16))
 			{
 				if (from >= 48)
 				{
-					units[from - 8] |= Constants.EN_PASSANT;
+					results[from - 8] |= Constants.EN_PASSANT;
 				}
 				else
 				{
-					units[from + 8] |= Constants.EN_PASSANT;
+					results[from + 8] |= Constants.EN_PASSANT;
 				}
 			}
 						
 			// other player's turn
-			Engine.UpdateTurnFlag(ref units);
+			Engine.UpdateTurnFlag(ref results);
+			
+			return results;
 		}
 		
 		private static void UpdateTurnFlag(ref byte[] units)
@@ -435,16 +445,16 @@ namespace ChessCup.Game
 			if ((units[0] & Constants.WHITE_TURN) == Constants.WHITE_TURN)
 			{
 				ulong attackedSquares = FindSquaresUnderAttack(units, Constants.BLACK);
-				return MoveList(Engine.FindAvailbleMoves(units, Constants.WHITE, attackedSquares), units);
+				return MoveList(Engine.FindAvailbleMoves(units, Constants.WHITE, attackedSquares, 1), units);
 			}
 			else
 			{
-				ulong attackedSquares = FindSquaresUnderAttack(units, Constants.BLACK);
-				return MoveList(Engine.FindAvailbleMoves(units, Constants.BLACK, attackedSquares), units);
+				ulong attackedSquares = FindSquaresUnderAttack(units, Constants.WHITE);
+				return MoveList(Engine.FindAvailbleMoves(units, Constants.BLACK, attackedSquares, 1), units);
 			}
 		}
 		
-		private static byte[,] FindAvailbleMoves(byte[] units, byte turn, ulong attackedSquares)
+		private static byte[,] FindAvailbleMoves(byte[] units, byte turn, ulong attackedSquares, byte depth)
 		{
 			byte[,] moves = new byte[2,240];
 			byte index = 0;
@@ -483,8 +493,27 @@ namespace ChessCup.Game
 				
 				foreach (byte to in destinations)
 				{
-					moves[0, index] = i;
-					moves[1, index++] = to;
+					// filter moves that allow king captures
+					byte[] tempUnits = MovePiece(units, i, to);
+					
+					byte enemyturn = Constants.BLACK;
+					if (turn != Constants.WHITE)
+						enemyturn = Constants.WHITE;
+					
+					ulong attacked = 0;
+					
+					if (depth != 0)
+					{
+						attacked = Engine.FindSquaresUnderAttack(tempUnits, enemyturn);
+					}
+					
+					byte kingLocation = Engine.FindKing(tempUnits, turn);
+					
+					if ((attacked & (1UL << kingLocation)) == 0)
+					{
+						moves[0, index] = i;
+						moves[1, index++] = to;
+					}
 				}
 			}
 			
@@ -494,7 +523,7 @@ namespace ChessCup.Game
 		private static ulong FindSquaresUnderAttack(byte [] units, byte turn)
 		{
 			ulong result = 0;
-			byte[,] moves = Engine.FindAvailbleMoves(units, turn, 0);
+			byte[,] moves = Engine.FindAvailbleMoves(units, turn, 0, 0);
 			
 			for (byte i = 0; i < 240; i++)
 			{
@@ -503,6 +532,17 @@ namespace ChessCup.Game
 			}
 			
 			return result;
+		}
+
+		private static byte FindKing(byte [] units, byte turn)
+		{
+			for (byte i = 0; i < 64; i++)
+			{
+				if ((units[i] & (Constants.MASK_TYPE | Constants.MASK_COLOUR)) == (Constants.KING | turn))
+					return i;
+			}
+			
+			return 64;
 		}
 		
 		private static List<Move> MoveList(byte[,] moves, byte[] units)
