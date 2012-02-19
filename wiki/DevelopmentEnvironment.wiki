@@ -1,0 +1,21 @@
+#summary Setting up the build envelopment
+
+=Software required for the build envelopment=
+
+[http://www.microsoft.com/download/en/details.aspx?id=19 Microsoft.NET v2.0.50727]
+
+[http://sourceforge.net/projects/sharpdevelop/files/SharpDevelop%203.x/3.2/SharpDevelop_3.2.1.6466_Setup.msi/download SharpDevelop v3.2.1.6466]
+	
+[https://sourceforge.net/projects/tortoisesvn/files/1.7.4/Application/ TortoiseSVN 1.7.4] (install command line tools):
+
+[http://www.7-zip.org/download.html 7zip]	
+
+[http://sourceforge.net/projects/nsis/files/NSIS%202/2.46/nsis-2.46-setup.exe/download nsis v2.46]	
+
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
