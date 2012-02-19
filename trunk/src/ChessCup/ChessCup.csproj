@@ -108,6 +108,5 @@
     <Folder Include="Game" />
     <Folder Include="Game\Units" />
     <Folder Include="GUI" />
-    <Folder Include="resources" />
   </ItemGroup>
 </Project>
