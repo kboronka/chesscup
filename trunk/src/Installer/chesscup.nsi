@@ -1,6 +1,9 @@
 Name "ChessCup"
 
-!define SOURCE_PATH "..\"
+!define ROOT_PATH "..\.."
+!define SOURCE_PATH "${ROOT_PATH}\src\ChessCup"
+!define INSTALLER_PATH "${ROOT_PATH}\src\Installer"
+!define ART_PATH "${ROOT_PATH}\src\Art"
 !define PRODUCT_VERSION "0.0.0.0"
 !define PRODUCT_PUBLISHER "Kevin Boronka"
 !define PRODUCT_WEB_SITE "http://sourceforge.net/projects/chesscup/"
@@ -34,25 +37,25 @@ ShowUnInstDetails show
 AutoCloseWindow true
 
 !define MUI_ABORTWARNING
-!define MUI_ICON "${SOURCE_PATH}\resources\ChessCup.ico"
-!define MUI_UNICON "${SOURCE_PATH}\resources\chesscup-uninstall-full.ico"
+!define MUI_ICON "${ART_PATH}\ChessCup.ico"
+!define MUI_UNICON "${INSTALLER_PATH}\chesscup-uninstall-full.ico"
 
 !define MUI_LANGDLL_REGISTRY_ROOT "${PRODUCT_UNINST_ROOT_KEY}"
 !define MUI_LANGDLL_REGISTRY_KEY "${PRODUCT_UNINST_KEY}"
 !define MUI_LANGDLL_REGISTRY_VALUENAME "NSIS:Language"
 
 !define MUI_HEADERIMAGE
-!define MUI_HEADERIMAGE_BITMAP "${SOURCE_PATH}\resources\chesscup-header.bmp"
-!define MUI_HEADERIMAGE_UNBITMAP "${SOURCE_PATH}\resources\chesscup-header.bmp"
-!define MUI_WELCOMEFINISHPAGE_BITMAP "${SOURCE_PATH}\resources\chesscup-install-wizard.bmp"
-!define MUI_UNWELCOMEFINISHPAGE_BITMAP "${SOURCE_PATH}\resources\chesscup-install-wizard.bmp"
+!define MUI_HEADERIMAGE_BITMAP "${INSTALLER_PATH}\chesscup-header.bmp"
+!define MUI_HEADERIMAGE_UNBITMAP "${INSTALLER_PATH}\chesscup-header.bmp"
+!define MUI_WELCOMEFINISHPAGE_BITMAP "${INSTALLER_PATH}\chesscup-install-wizard.bmp"
+!define MUI_UNWELCOMEFINISHPAGE_BITMAP "${INSTALLER_PATH}\chesscup-install-wizard.bmp"
 # ---------------------------------------------------------------------------
 # INSTALLER PAGES
 # ---------------------------------------------------------------------------
 
 	!define MUI_WELCOMEPAGE_TITLE_3LINES
 !insertmacro MUI_PAGE_WELCOME
-!insertmacro MUI_PAGE_LICENSE "..\..\..\license.txt"
+!insertmacro MUI_PAGE_LICENSE "${ROOT_PATH}\license.txt"
 !insertmacro MUI_PAGE_DIRECTORY
 !insertmacro MUI_PAGE_INSTFILES
 	!define MUI_FINISHPAGE_TITLE_3LINES
@@ -228,9 +231,9 @@ Section "ChessCup" InSTSSection
    SetOutPath "$INSTDIR"
 
    File "${SOURCE_PATH}\bin\${BUILDTYPE}\ChessCup.exe"
-   File "${SOURCE_PATH}\..\..\license.txt"
+   File "${ROOT_PATH}\license.txt"
    File "${SOURCE_PATH}\bin\${BUILDTYPE}\SkylaLib.Tools.dll"   
-   File "${SOURCE_PATH}\resources\ChessCup.ico"
+   File "${ART_PATH}\ChessCup.ico"
    
    IfErrors Error
 

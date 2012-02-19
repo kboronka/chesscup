@@ -1,4 +1,4 @@
-rem @echo off
+@echo off
 pushd "%~dp0"
 
 set SOLUTION=ChessCup.sln
@@ -10,20 +10,18 @@ if "%PROCESSOR_ARCHITEW6432%" == "AMD64" set BITS=x64
 
 IF %BITS% == x86 (
 	rem OS is 32bit
-	echo OS is 32bit
 	set NSIS="%PROGRAMFILES%\NSIS\makensis.exe" /V3
 ) ELSE (
 	rem OS is 64bit
-	echo OS is 64bit
 	set NSIS="%PROGRAMFILES(X86)%\NSIS\makensis.exe" /V3
 )
-echo %NSIS%
+
 set ZIP="%PROGRAMFILES%\7-Zip\7zG.exe" a -tzip
 set MSBUILD="%WinDir%\Microsoft.NET\Framework\v2.0.50727\msbuild.exe"
 set REPLACE="lib\sar\sar.exe"
 
 
-echo "VERSION.MAJOR.MINOR.BUILD".
+echo VERSION.MAJOR.MINOR.BUILD
 set /p VERSION="> "
 
 %REPLACE% ChessCup.nsi "0.0.0.0" "%VERSION%"
@@ -36,9 +34,9 @@ echo building chesscup
 if errorlevel 1 goto BuildFailed
 
 echo creating installer
-%NSIS% "src\ChessCup\resources\chesscup.nsi"
+%NSIS% "src\Installer\chesscup.nsi"
 if errorlevel 1 goto BuildFailed
-move "src\ChessCup\Resources\ChessCup %VERSION% Install.exe" "ChessCup %VERSION% Install.exe"
+move "src\Installer\ChessCup %VERSION% Install.exe" "ChessCup %VERSION% Install.exe"
 
 rem -----------------------------------------------------------------------
 rem Build Complete
@@ -49,9 +47,7 @@ rem -----------------------------------------------------------------------
 %REPLACE% %SOLUTION% "Format Version 9.00" "Format Version 10.00"
 %REPLACE% %SOLUTION% "Visual Studio 2005" "Visual Studio 2008"
 
-echo.
 echo build completed
-pause
 
 popd
 exit /b 0
@@ -67,7 +63,6 @@ rem -----------------------------------------------------------------------
 %REPLACE% ChessCup.sln "Format Version 9.00" "Format Version 10.00"
 %REPLACE% ChessCup.sln "Visual Studio 2005" "Visual Studio 2008"
 
-echo.
 echo build failed
 pause
 
