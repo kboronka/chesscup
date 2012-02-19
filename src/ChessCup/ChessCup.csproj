@@ -53,13 +53,13 @@
     <Compile Include="Game\Constants.cs" />
     <Compile Include="Game\Engine.cs" />
     <Compile Include="Game\Move.cs" />
+    <Compile Include="Game\Units\BaseUnit.cs" />
     <Compile Include="Game\Units\Bishop.cs" />
     <Compile Include="Game\Units\King.cs" />
     <Compile Include="Game\Units\Knight.cs" />
     <Compile Include="Game\Units\Pawn.cs" />
     <Compile Include="Game\Units\Queen.cs" />
     <Compile Include="Game\Units\Rook.cs" />
-    <Compile Include="Game\Units\Unit.cs" />
     <Compile Include="GUI\Board.cs" />
     <Compile Include="GUI\Board.Designer.cs">
       <DependentUpon>Board.cs</DependentUpon>

@@ -48,8 +48,6 @@ namespace ChessCup.GUI
 		{
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.BackgroundLayout = new System.Windows.Forms.TableLayoutPanel();
-			this.prisonersOfWarBlack = new ChessCup.GUI.PrisonersOfWar();
-			this.prisonersOfWarWhite = new ChessCup.GUI.PrisonersOfWar();
 			this.BackgroundLayout.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -148,11 +146,9 @@ namespace ChessCup.GUI
 			// 
 			// BackgroundLayout
 			// 
-			this.BackgroundLayout.ColumnCount = 2;
+			this.BackgroundLayout.ColumnCount = 1;
 			this.BackgroundLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 352F));
-			this.BackgroundLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.BackgroundLayout.Controls.Add(this.prisonersOfWarBlack, 1, 0);
-			this.BackgroundLayout.Controls.Add(this.prisonersOfWarWhite, 1, 1);
+			this.BackgroundLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.BackgroundLayout.Controls.Add(this.tableLayoutPanel1, 0, 0);
 			this.BackgroundLayout.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.BackgroundLayout.Location = new System.Drawing.Point(0, 0);
@@ -161,30 +157,8 @@ namespace ChessCup.GUI
 			this.BackgroundLayout.RowCount = 2;
 			this.BackgroundLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 176F));
 			this.BackgroundLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 176F));
-			this.BackgroundLayout.Size = new System.Drawing.Size(396, 352);
+			this.BackgroundLayout.Size = new System.Drawing.Size(352, 352);
 			this.BackgroundLayout.TabIndex = 1;
-			// 
-			// prisonersOfWarBlack
-			// 
-			this.prisonersOfWarBlack.BackColor = System.Drawing.Color.Transparent;
-			this.prisonersOfWarBlack.DeadMen = null;
-			this.prisonersOfWarBlack.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.prisonersOfWarBlack.Location = new System.Drawing.Point(352, 0);
-			this.prisonersOfWarBlack.Margin = new System.Windows.Forms.Padding(0);
-			this.prisonersOfWarBlack.Name = "prisonersOfWarBlack";
-			this.prisonersOfWarBlack.Size = new System.Drawing.Size(44, 176);
-			this.prisonersOfWarBlack.TabIndex = 3;
-			// 
-			// prisonersOfWarWhite
-			// 
-			this.prisonersOfWarWhite.BackColor = System.Drawing.Color.Transparent;
-			this.prisonersOfWarWhite.DeadMen = null;
-			this.prisonersOfWarWhite.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.prisonersOfWarWhite.Location = new System.Drawing.Point(352, 176);
-			this.prisonersOfWarWhite.Margin = new System.Windows.Forms.Padding(0);
-			this.prisonersOfWarWhite.Name = "prisonersOfWarWhite";
-			this.prisonersOfWarWhite.Size = new System.Drawing.Size(44, 176);
-			this.prisonersOfWarWhite.TabIndex = 3;
 			// 
 			// Board
 			// 
@@ -194,12 +168,10 @@ namespace ChessCup.GUI
 			this.Controls.Add(this.BackgroundLayout);
 			this.Margin = new System.Windows.Forms.Padding(0);
 			this.Name = "Board";
-			this.Size = new System.Drawing.Size(396, 352);
+			this.Size = new System.Drawing.Size(352, 352);
 			this.BackgroundLayout.ResumeLayout(false);
 			this.ResumeLayout(false);
 		}
-		private ChessCup.GUI.PrisonersOfWar prisonersOfWarWhite;
-		private ChessCup.GUI.PrisonersOfWar prisonersOfWarBlack;
 		private System.Windows.Forms.TableLayoutPanel BackgroundLayout;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 	}

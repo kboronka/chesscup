@@ -51,6 +51,7 @@ namespace ChessCup
 			this.Text = "ChessCup " + AssemblyInfo.Version;
 			this.copyrightStatus.Text = AssemblyInfo.Copyright;
 			this.UpdateStatusBar();
+			this.moveList1.Clear();
 
 			Program.ShowLog();
 		}
@@ -62,19 +63,6 @@ namespace ChessCup
 		#endregion
 		
 		#region methods
-		
-		private void UpdateMoveList()
-		{
-			this.moveList.BeginUpdate();
-			this.moveList.Items.Clear();
-			
-			foreach (Move move in this.engine.Moves)
-			{
-				this.moveList.Items.Add(move);
-			}
-			
-			this.moveList.EndUpdate();
-		}
 
 		private void UpdateStatusBar()
 		{
@@ -106,8 +94,8 @@ namespace ChessCup
 
 		private void board_MoveDone(object sender, EventArgs e)
 		{
+			this.moveList1.AddMove(this.engine.Moves[this.engine.Moves.Count - 1], this.engine.FEN);
 			this.UpdateStatusBar();
-			this.UpdateMoveList();
 		}
 		
 		private void LoadFENClick(object sender, EventArgs e)
@@ -116,7 +104,7 @@ namespace ChessCup
 			{
 				this.engine.FEN = this.fen.Text;
 				this.board.UpdateBoardArray();
-				this.UpdateMoveList();
+				this.moveList1.Clear();
 			}
 			catch (Exception ex)
 			{
