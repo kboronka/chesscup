@@ -44,6 +44,10 @@ set CONFIG=Release
 
 
 :: Build Complete
+	copy src\bin\%CONFIG%\*.exe release\*.exe
+	copy src\bin\%CONFIG%\*.dll release\*.dll
+	copy license.txt release\license.txt
+	
 	%REPLACE% ChessCup.nsi "%VERSION%" "0.0.0.0"
 	%REPLACE% AssemblyInfo.cs "%VERSION%" "0.0.0.0"
 	%REPLACE% %SOLUTION% "Format Version 9.00" "Format Version 10.00"
