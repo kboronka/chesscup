@@ -50,12 +50,11 @@ set CONFIG=Release
 	%REPLACE% %SOLUTION% "Visual Studio 2005" "Visual Studio 2008"
 	
 	svn commit -m "version %VERSION%"
-	svn copy %BASEURL%/trunk %BASEURL%/tags/%VERSION% -m "Tagging the %VERSION% release of the project"
-	pause
+	svn copy %BASEURL%/trunk %BASEURL%/tags/%VERSION% -m "Tagging the %VERSION% version release of the project"
 
 	echo
 	echo
-	echo build completed
+	echo build completed, trunk has been tagged
 
 	popd
 	exit /b 0
