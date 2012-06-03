@@ -14,10 +14,10 @@ set CONFIG=Release
 	if "%PROCESSOR_ARCHITEW6432%" == "AMD64" set BITS=x64
 
 	IF %BITS% == x86 (
-		rem OS is 32bit
+		echo OS is 32bit
 		set MAKENSIS="%PROGRAMFILES%\NSIS\makensis.exe" /V3
 	) ELSE (
-		rem OS is 64bit
+		echo OS is 64bit
 		set MAKENSIS="%PROGRAMFILES(X86)%\NSIS\makensis.exe" /V3
 	)
 
@@ -36,7 +36,7 @@ set CONFIG=Release
 	if errorlevel 1 goto BuildFailed
 
 	echo creating installer
-	%NSIS% "src\Installer\chesscup.nsi"
+	%MAKENSIS% "src\Installer\chesscup.nsi"
 	if errorlevel 1 goto BuildFailed
 	move "src\Installer\ChessCup %VERSION% Install.exe" "ChessCup %VERSION% Install.exe"
 
@@ -47,8 +47,8 @@ set CONFIG=Release
 	%REPLACE% %SOLUTION% "Format Version 9.00" "Format Version 10.00"
 	%REPLACE% %SOLUTION% "Visual Studio 2005" "Visual Studio 2008"
 	
-	svn ci
-	svn cp %BASEURL%/trunk BASEURL/tags/%VERSION%  # tag trunk as %VERSION%
+	svn commit "version %VERSION%"
+	svn copy %BASEURL%/trunk BASEURL/tags/%VERSION%  # tag trunk as %VERSION%
 	pause
 
 	echo
