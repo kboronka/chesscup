@@ -6,7 +6,7 @@ set CONFIG=Release
 
 :: Paths
 	set MSBUILD="%WinDir%\Microsoft.NET\Framework\v2.0.50727\msbuild.exe"
-	set REPLACE="release\sar.exe"
+	set REPLACE="lib\sar\sar.exe"
 	set ZIP="%PROGRAMFILES%\7-Zip\7zG.exe" a -tzip
 
 	set BITS=x86
