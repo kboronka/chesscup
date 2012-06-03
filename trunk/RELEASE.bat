@@ -47,10 +47,9 @@ set CONFIG=Release
 	%REPLACE% %SOLUTION% "Format Version 9.00" "Format Version 10.00"
 	%REPLACE% %SOLUTION% "Visual Studio 2005" "Visual Studio 2008"
 	
-	echo svn commit -m "version %VERSION%" %BASEURL%/trunk
 	svn commit -m "version %VERSION%"
 	echo svn copy %BASEURL%/trunk BASEURL/tags/%VERSION%  "Tagging the %VERSION% release of the project"
-	svn copy %BASEURL%/trunk BASEURL/tags/%VERSION%  "Tagging the %VERSION% release of the project"
+	svn copy %BASEURL%/trunk BASEURL/tags/%VERSION% -m "Tagging the %VERSION% release of the project"
 	:: svn copy http://host_name/repos/project/trunk http://host_name/repos/project/tags/0.1.0 -m "Tagging the 0.1.0 release of the project"
 	pause
 
