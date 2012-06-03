@@ -1,14 +1,10 @@
 @echo off
 pushd "%~dp0"
 set SOLUTION=ChessCup.sln
-set BASEURL=https://chesscup.googlecode.com/svn/
+set BASEURL=https://chesscup.googlecode.com/svn
 set CONFIG=Release
 
 :: Paths
-	set MSBUILD="%WinDir%\Microsoft.NET\Framework\v2.0.50727\msbuild.exe"
-	set REPLACE="lib\sar\sar.exe"
-	set ZIP="%PROGRAMFILES%\7-Zip\7zG.exe" a -tzip
-
 	set BITS=x86
 	if "%PROCESSOR_ARCHITECTURE%" == "AMD64" set BITS=x64
 	if "%PROCESSOR_ARCHITEW6432%" == "AMD64" set BITS=x64
@@ -16,9 +12,15 @@ set CONFIG=Release
 	IF %BITS% == x86 (
 		echo OS is 32bit
 		set MAKENSIS="%PROGRAMFILES%\NSIS\makensis.exe" /V3
+		set MSBUILD="%WinDir%\Microsoft.NET\Framework\v2.0.50727\msbuild.exe"
+		set REPLACE="lib\sar\sar.exe"
+		set ZIP="%PROGRAMFILES%\7-Zip\7zG.exe" a -tzip
 	) ELSE (
 		echo OS is 64bit
 		set MAKENSIS="%PROGRAMFILES(X86)%\NSIS\makensis.exe" /V3
+		set MSBUILD="%WinDir%\Microsoft.NET\Framework\v2.0.50727\msbuild.exe"
+		set REPLACE="lib\sar\sar.exe"
+		set ZIP="%PROGRAMFILES%\7-Zip\7zG.exe" a -tzip
 	)
 
 :: Build Soultion
@@ -48,9 +50,7 @@ set CONFIG=Release
 	%REPLACE% %SOLUTION% "Visual Studio 2005" "Visual Studio 2008"
 	
 	svn commit -m "version %VERSION%"
-	echo svn copy %BASEURL%/trunk BASEURL/tags/%VERSION%  "Tagging the %VERSION% release of the project"
-	svn copy %BASEURL%/trunk BASEURL/tags/%VERSION% -m "Tagging the %VERSION% release of the project"
-	:: svn copy http://host_name/repos/project/trunk http://host_name/repos/project/tags/0.1.0 -m "Tagging the 0.1.0 release of the project"
+	svn copy %BASEURL%/trunk %BASEURL%/tags/%VERSION% -m "Tagging the %VERSION% release of the project"
 	pause
 
 	echo
