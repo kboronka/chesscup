@@ -44,8 +44,8 @@ set CONFIG=Release
 
 
 :: Build Complete
-	copy src\bin\%CONFIG%\*.exe release\*.exe
-	copy src\bin\%CONFIG%\*.dll release\*.dll
+	copy src\ChessCup\bin\%CONFIG%\*.exe release\*.exe
+	copy src\ChessCup\bin\%CONFIG%\*.dll release\*.dll
 	copy license.txt release\license.txt
 	
 	%REPLACE% ChessCup.nsi "%VERSION%" "0.0.0.0"
