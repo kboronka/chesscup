@@ -1,3 +1,11 @@
+:: Development Enviorment
+::
+:: HTML workshop							http://www.microsoft.com/en-us/download/details.aspx?id=21138
+:: Microsoft.NET v2.0.50727					http://www.microsoft.com/download/en/details.aspx?id=19
+:: SharpDevelop v3.2.1.6466					http://sourceforge.net/projects/sharpdevelop/files/SharpDevelop%203.x/3.2/SharpDevelop_3.2.1.6466_Setup.msi/download
+:: TortoiseSVN 1.7.4(+command line tools)	https://sourceforge.net/projects/tortoisesvn/files/1.7.4/Application/
+:: 7zip										http://www.7-zip.org/download.html
+
 @echo off
 pushd "%~dp0"
 set SOLUTION=ChessCup.sln
@@ -28,13 +36,13 @@ set CONFIG=Release
 	set /p VERSION="> "
 
 	svn update
-	%REPLACE% ChessCup.nsi "0.0.0.0" "%VERSION%"
-	%REPLACE% AssemblyInfo.cs "0.0.0.0" "%VERSION%"
-	%REPLACE% %SOLUTION% "Format Version 10.00" "Format Version 9.00"
-	%REPLACE% %SOLUTION% "Visual Studio 2008" "Visual Studio 2005"
+	%REPLACE% -replace ChessCup.nsi "0.0.0.0" "%VERSION%"
+	%REPLACE% -replace AssemblyInfo.cs "0.0.0.0" "%VERSION%"
+	%REPLACE% -replace %SOLUTION% "Format Version 10.00" "Format Version 9.00"
+	%REPLACE% -replace %SOLUTION% "Visual Studio 2008" "Visual Studio 2005"
 
 	echo building chesscup
-	%MSBUILD% "src\chesscup.sln" /p:Configuration=%CONFIG% /p:Platform="Any CPU"
+	%MSBUILD% "chesscup.sln" /p:Configuration=%CONFIG% /p:Platform="Any CPU"
 	if errorlevel 1 goto BuildFailed
 
 	echo creating installer
@@ -48,10 +56,10 @@ set CONFIG=Release
 	copy src\ChessCup\bin\%CONFIG%\*.dll release\*.dll
 	copy license.txt release\license.txt
 	
-	%REPLACE% ChessCup.nsi "%VERSION%" "0.0.0.0"
-	%REPLACE% AssemblyInfo.cs "%VERSION%" "0.0.0.0"
-	%REPLACE% %SOLUTION% "Format Version 9.00" "Format Version 10.00"
-	%REPLACE% %SOLUTION% "Visual Studio 2005" "Visual Studio 2008"
+	%REPLACE% -replace ChessCup.nsi "%VERSION%" "0.0.0.0"
+	%REPLACE% -replace AssemblyInfo.cs "%VERSION%" "0.0.0.0"
+	%REPLACE% -replace %SOLUTION% "Format Version 9.00" "Format Version 10.00"
+	%REPLACE% -replace %SOLUTION% "Visual Studio 2005" "Visual Studio 2008"
 	
 	svn commit -m "version %VERSION%"
 	svn copy %BASEURL%/trunk %BASEURL%/tags/%VERSION% -m "Tagging the %VERSION% version release of the project"
@@ -65,10 +73,10 @@ set CONFIG=Release
 
 :: Build Failed
 	:BuildFailed
-	%REPLACE% ChessCup.nsi "%VERSION%" "0.0.0.0"
-	%REPLACE% AssemblyInfo.cs "%VERSION%" "0.0.0.0"
-	%REPLACE% ChessCup.sln "Format Version 9.00" "Format Version 10.00"
-	%REPLACE% ChessCup.sln "Visual Studio 2005" "Visual Studio 2008"
+	%REPLACE% -replace ChessCup.nsi "%VERSION%" "0.0.0.0"
+	%REPLACE% -replace AssemblyInfo.cs "%VERSION%" "0.0.0.0"
+	%REPLACE% -replace ChessCup.sln "Format Version 9.00" "Format Version 10.00"
+	%REPLACE% -replace ChessCup.sln "Visual Studio 2005" "Visual Studio 2008"
 
 	echo
 	echo
