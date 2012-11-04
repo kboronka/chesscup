@@ -9,60 +9,44 @@
 @echo off
 pushd "%~dp0"
 set SOLUTION=ChessCup.sln
-set BASEURL=https://chesscup.googlecode.com/svn
+set INSTALLER=ChessCup.nsi
+set REPO=https://chesscup.googlecode.com/svn
 set CONFIG=Release
 
 :: Paths
-	set BITS=x86
-	if "%PROCESSOR_ARCHITECTURE%" == "AMD64" set BITS=x64
-	if "%PROCESSOR_ARCHITEW6432%" == "AMD64" set BITS=x64
-
-	IF %BITS% == x86 (
-		echo OS is 32bit
-		set MAKENSIS="%PROGRAMFILES%\NSIS\makensis.exe" /V3
-		set MSBUILD="%WinDir%\Microsoft.NET\Framework\v2.0.50727\msbuild.exe"
-		set REPLACE="lib\sar\sar.exe"
-		set ZIP="%PROGRAMFILES%\7-Zip\7zG.exe" a -tzip
-	) ELSE (
-		echo OS is 64bit
-		set MAKENSIS="%PROGRAMFILES(X86)%\NSIS\makensis.exe" /V3
-		set MSBUILD="%WinDir%\Microsoft.NET\Framework\v2.0.50727\msbuild.exe"
-		set REPLACE="lib\sar\sar.exe"
-		set ZIP="%PROGRAMFILES%\7-Zip\7zG.exe" a -tzip
-	)
+	set SAR="lib\sar\sar.exe"
+	set ZIP="%PROGRAMFILES%\7-Zip\7zG.exe" a -tzip
 
 :: Build Soultion
 	echo "VERSION.MAJOR.MINOR.BUILD".
 	set /p VERSION="> "
 
 	svn update
-	%REPLACE% -replace ChessCup.nsi "0.0.0.0" "%VERSION%"
-	%REPLACE% -replace AssemblyInfo.cs "0.0.0.0" "%VERSION%"
-	%REPLACE% -replace %SOLUTION% "Format Version 10.00" "Format Version 9.00"
-	%REPLACE% -replace %SOLUTION% "Visual Studio 2008" "Visual Studio 2005"
+
+	%SAR% -r AssemblyInfo.* ((Version)\(\"\d+\.\d+\.\d+\.\d+\"\)) "Version(\"%VERSION%\")"
+	%SAR% -r %INSTALLER% ((PRODUCT_VERSION)\s\"\d+\.\d+\.\d+\.\d+\") "PRODUCT_VERSION \"%VERSION%\""
+	%SAR% -r %SOLUTION% "Format Version 10.00" "Format Version 9.00"
+	%SAR% -r %SOLUTION% "Visual Studio 2008" "Visual Studio 2005"
 
 	echo building chesscup
-	%MSBUILD% "chesscup.sln" /p:Configuration=%CONFIG% /p:Platform="Any CPU"
+	%SAR% -b.net 2.0 %SOLUTION% /p:Configuration=%CONFIG% /p:Platform=\"Any CPU\"
 	if errorlevel 1 goto BuildFailed
 
 	echo creating installer
-	%MAKENSIS% "src\Installer\chesscup.nsi"
+	%SAR% -b.nsis src\Installer\%INSTALLER%
 	if errorlevel 1 goto BuildFailed
-	move "src\Installer\ChessCup %VERSION% Install.exe" "ChessCup %VERSION% Install.exe"
-
-
+	
 :: Build Complete
+	move "src\Installer\ChessCup %VERSION% Install.exe" "ChessCup %VERSION% Install.exe"
 	copy src\ChessCup\bin\%CONFIG%\*.exe release\*.exe
 	copy src\ChessCup\bin\%CONFIG%\*.dll release\*.dll
 	copy license.txt release\license.txt
 	
-	%REPLACE% -replace ChessCup.nsi "%VERSION%" "0.0.0.0"
-	%REPLACE% -replace AssemblyInfo.cs "%VERSION%" "0.0.0.0"
-	%REPLACE% -replace %SOLUTION% "Format Version 9.00" "Format Version 10.00"
-	%REPLACE% -replace %SOLUTION% "Visual Studio 2005" "Visual Studio 2008"
+	%SAR% -r %SOLUTION% "Format Version 9.00" "Format Version 10.00"
+	%SAR% -r %SOLUTION% "Visual Studio 2005" "Visual Studio 2008"
 	
 	svn commit -m "version %VERSION%"
-	svn copy %BASEURL%/trunk %BASEURL%/tags/%VERSION% -m "Tagging the %VERSION% version release of the project"
+	svn copy %REPO%/trunk %REPO%/tags/%VERSION% -m "Tagging the %VERSION% version release of the project"
 
 	echo
 	echo
@@ -73,10 +57,8 @@ set CONFIG=Release
 
 :: Build Failed
 	:BuildFailed
-	%REPLACE% -replace ChessCup.nsi "%VERSION%" "0.0.0.0"
-	%REPLACE% -replace AssemblyInfo.cs "%VERSION%" "0.0.0.0"
-	%REPLACE% -replace ChessCup.sln "Format Version 9.00" "Format Version 10.00"
-	%REPLACE% -replace ChessCup.sln "Visual Studio 2005" "Visual Studio 2008"
+	%SAR% -r ChessCup.sln "Format Version 9.00" "Format Version 10.00"
+	%SAR% -r ChessCup.sln "Visual Studio 2005" "Visual Studio 2008"
 
 	echo
 	echo
