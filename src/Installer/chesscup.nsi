@@ -232,7 +232,7 @@ Section "ChessCup" InSTSSection
 
    File "${SOURCE_PATH}\bin\${BUILDTYPE}\ChessCup.exe"
    File "${ROOT_PATH}\license.txt"
-   File "${SOURCE_PATH}\bin\${BUILDTYPE}\SkylaLib.Tools.dll"   
+   File "${SOURCE_PATH}\bin\${BUILDTYPE}\skylib.tools.dll"   
    File "${ART_PATH}\ChessCup.ico"
    
    IfErrors Error
@@ -287,7 +287,7 @@ Section "-un.ChessCup" UnSTSSection
 
    Delete "$INSTDIR\chesscup.exe"
    Delete "$INSTDIR\license.txt"
-   Delete "$INSTDIR\SkylaLib.Tools.dll"
+   Delete "$INSTDIR\skylib.tools.dll"
    Delete "$INSTDIR\chesscup.ico"
 
 

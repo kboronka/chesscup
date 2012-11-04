@@ -40,8 +40,8 @@
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
   <ItemGroup>
-    <Reference Include="SkylaLib.Tools">
-      <HintPath>..\..\lib\skylalib\SkylaLib.Tools.dll</HintPath>
+    <Reference Include="skylib.Tools">
+      <HintPath>..\..\lib\skylib\skylib.Tools.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
