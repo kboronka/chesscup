@@ -50,6 +50,7 @@ namespace ChessCup.Game
 		
 		public const byte MASK_COLOUR	= 0x30;
 		public const byte MASK_TYPE		= 0x07;
+		
 		#region Enum
 		
 		public enum UnitType
