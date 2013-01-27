@@ -19,7 +19,7 @@
 using System;
 using System.Windows.Forms;
 
-using SkylaLib.Tools;
+using skylib.Tools;
 
 namespace ChessCup
 {

@@ -21,7 +21,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-using SkylaLib.Tools;
+using skylib.Tools;
 
 using ChessCup.Game;
 using ChessCup.Game.Units;
