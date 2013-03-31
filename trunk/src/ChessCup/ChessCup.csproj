@@ -1,4 +1,5 @@
-﻿<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectGuid>{702C820B-15F7-46F7-BDCC-C461B87CEBC2}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -40,9 +41,6 @@
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
   <ItemGroup>
-    <Reference Include="skylib.tools">
-      <HintPath>..\..\lib\skylib\skylib.tools.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -108,5 +106,11 @@
     <Folder Include="Game" />
     <Folder Include="Game\Units" />
     <Folder Include="GUI" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\lib\skylib-source\SkyLib.csproj">
+      <Project>{6018DC4A-ACD2-4A66-A4A5-1975FC28639A}</Project>
+      <Name>SkyLib</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
