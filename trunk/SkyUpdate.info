@@ -1,11 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<SkyUpdater version="1.0.1.57">
-	<Version>0.0.0.10</Version>
-	<Application>ChessCup</Application>
+<SkyUpdater version="1.0.1.60">
+	<Version></Version>
+	<Application></Application>
 	<Files>
 		<File>
-			<URL>https://chesscup.googlecode.com/svn/trunk/release/ChessCup.exe</URL>
-			<Path>ChessCup.exe</Path>
+			<URL></URL>
+			<Path></Path>
+			<File>
+				<URL>https://chesscup.googlecode.com/svn/trunk/release/license.txt</URL>
+				<Path>license.txt</Path>
+			</File>
 		</File>
 	</Files>
 </SkyUpdater>
