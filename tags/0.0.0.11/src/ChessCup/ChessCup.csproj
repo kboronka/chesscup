@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{702C820B-15F7-46F7-BDCC-C461B87CEBC2}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>ChessCup</RootNamespace>
+    <AssemblyName>ChessCup</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SourceAnalysisOverrideSettingsFile>C:\Users\Boronka\AppData\Roaming\ICSharpCode/SharpDevelop3.0\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
+    <ApplicationIcon>..\Art\ChessCup.ico</ApplicationIcon>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <NoStdLib>False</NoStdLib>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <BaseAddress>4194304</BaseAddress>
+    <FileAlignment>4096</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <Optimize>False</Optimize>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
+    <Optimize>True</Optimize>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Game\Constants.cs" />
+    <Compile Include="Game\Engine.cs" />
+    <Compile Include="Game\Move.cs" />
+    <Compile Include="Game\Units\BaseUnit.cs" />
+    <Compile Include="Game\Units\Bishop.cs" />
+    <Compile Include="Game\Units\King.cs" />
+    <Compile Include="Game\Units\Knight.cs" />
+    <Compile Include="Game\Units\Pawn.cs" />
+    <Compile Include="Game\Units\Queen.cs" />
+    <Compile Include="Game\Units\Rook.cs" />
+    <Compile Include="GUI\Board.cs" />
+    <Compile Include="GUI\Board.Designer.cs">
+      <DependentUpon>Board.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ChessCup.cs" />
+    <Compile Include="GUI\ChessCup.Designer.cs">
+      <DependentUpon>ChessCup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\MoveList.cs" />
+    <Compile Include="GUI\MoveList.Designer.cs">
+      <DependentUpon>MoveList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Pieces.Designer.cs">
+      <DependentUpon>Pieces.resx</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\PrisonersOfWar.cs" />
+    <Compile Include="GUI\PrisonersOfWar.Designer.cs">
+      <DependentUpon>PrisonersOfWar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Square.cs" />
+    <Compile Include="GUI\Square.Designer.cs">
+      <DependentUpon>Square.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GUI\Board.resx">
+      <DependentUpon>Board.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ChessCup.resx">
+      <DependentUpon>ChessCup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\MoveList.resx">
+      <DependentUpon>MoveList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Pieces.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\PrisonersOfWar.resx">
+      <DependentUpon>PrisonersOfWar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Square.resx">
+      <DependentUpon>Square.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Game" />
+    <Folder Include="Game\Units" />
+    <Folder Include="GUI" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\lib\skylib-source\SkyLib.csproj">
+      <Project>{6018DC4A-ACD2-4A66-A4A5-1975FC28639A}</Project>
+      <Name>SkyLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>
