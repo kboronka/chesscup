@@ -43,6 +43,8 @@
 	copy src\ChessCup\bin\%CONFIG%\*.dll release\*.dll
 	copy license.txt release\license.txt	
 	%SAR% -sky.gen SkyUpdate.info release\ChessCup.exe https://chesscup.googlecode.com/svn/trunk/release/ChessCup.exe
+	%SAR% -sky.add SkyUpdate.info release\skylib.Tools.dll https://chesscup.googlecode.com/svn/trunk/release/skylib.Tools.dll
+	%SAR% -sky.add SkyUpdate.info release\license.txt https://chesscup.googlecode.com/svn/trunk/release/license.txt
 
 	%SAR% -b.nsis src\Installer\%INSTALLER%
 	if "%ERRORLEVEL%" NEQ "0" goto BuildFailed
