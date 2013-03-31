@@ -18,10 +18,7 @@ using ChessCup.Game.Units;
 
 namespace ChessCup.Game
 {
-	/// <summary>
-	/// Description of Constants.
-	/// </summary>
-	public class Constants
+	public static class Constants
 	{
 		public const string STARTING_POSITION = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 		
@@ -92,10 +89,5 @@ namespace ChessCup.Game
 		public const int EDGE_RIGHT = 7;
 		public const int EDGE_BOTTOM = 7;
 		public const int EDGE_TOP = 0;
-		
-		public Constants()
-		{
-
-		}
 	}
 }
