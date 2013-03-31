@@ -8,6 +8,10 @@
 	:: SharpDevelop v3.2.1.6466					http://sourceforge.net/projects/sharpdevelop/files/SharpDevelop%203.x/3.2/SharpDevelop_3.2.1.6466_Setup.msi/download
 	:: HTML workshop							http://www.microsoft.com/en-us/download/details.aspx?id=21138
 
+:DownloadLink
+	:: GoogleCode: https://code.google.com/p/chesscup/downloads/list
+	:: SourceForge: http://sourceforge.net/projects/chesscup/files/
+	
 :BuildEnvironment
 	@echo off
 	pushd "%~dp0"
@@ -15,6 +19,7 @@
 	set INSTALLER=ChessCup.nsi
 	set REPO=https://chesscup.googlecode.com/svn
 	set CONFIG=Release
+	set BASEPATH=%~dp0
 
 :Paths
 	set SAR="lib\sar\sar.exe"
@@ -26,27 +31,32 @@
 
 	svn cleanup
 	svn update
-	%SAR% -f.bsd *.cs "Kevin Boronka"
-	%SAR% -r \src\AssemblyInfo.* ((Version)\(\"\d+\.\d+\.\d+\.\d+\"\)) "Version(\"%VERSION%\")"
+
+	%SAR% -f.bsd \src\*.cs "Kevin Boronka"
+	%SAR% -assy.ver \src\AssemblyInfo.* %VERSION%
 	%SAR% -r %INSTALLER% ((PRODUCT_VERSION)\s\"\d+\.\d+\.\d+\.\d+\") "PRODUCT_VERSION \"%VERSION%\""
 
-	echo building chesscup
 	%SAR% -b.net 3.5 %SOLUTION% /p:Configuration=%CONFIG% /p:Platform=\"Any CPU\"
-	if errorlevel 1 goto BuildFailed
-
-	echo creating installer
-	%SAR% -b.nsis src\Installer\%INSTALLER%
-	if errorlevel 1 goto BuildFailed
+	if "%ERRORLEVEL%" NEQ "0" goto BuildFailed
 	
-:BuildComplete
-	move "src\Installer\ChessCup %VERSION% Install.exe" "ChessCup %VERSION% Install.exe"
 	copy src\ChessCup\bin\%CONFIG%\*.exe release\*.exe
 	copy src\ChessCup\bin\%CONFIG%\*.dll release\*.dll
-	copy license.txt release\license.txt
-	
+	copy license.txt release\license.txt	
+	%SAR% -sky.gen SkyUpdate.info release\ChessCup.exe https://chesscup.googlecode.com/svn/trunk/release/ChessCup.exe
+
+	%SAR% -b.nsis src\Installer\%INSTALLER%
+	if "%ERRORLEVEL%" NEQ "0" goto BuildFailed
+	move "src\Installer\ChessCup %VERSION% Install.exe" "ChessCup %VERSION% Install.exe"
+
+:BuildComplete
 	svn commit -m "version %VERSION%"
 	svn copy %REPO%/trunk %REPO%/tags/%VERSION% -m "Tagging the %VERSION% version release of the project"
 	svn update
+	
+	cd lib\skylib-source
+	svn commit -m "sar version %VERSION%"
+	svn update
+	cd BASEPATH
 	
 	echo build completed, trunk has been tagged
 	popd
@@ -57,3 +67,5 @@
 	pause
 	popd
 	exit /b 1
+
+

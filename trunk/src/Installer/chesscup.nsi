@@ -1,10 +1,10 @@
-Name "ChessCup"
+﻿Name "ChessCup"
 
 !define ROOT_PATH "..\.."
 !define SOURCE_PATH "${ROOT_PATH}\src\ChessCup"
 !define INSTALLER_PATH "${ROOT_PATH}\src\Installer"
 !define ART_PATH "${ROOT_PATH}\src\Art"
-!define PRODUCT_VERSION "0.0.0.9"
+!define PRODUCT_VERSION "0.0.0.10"
 !define PRODUCT_PUBLISHER "Kevin Boronka"
 !define PRODUCT_WEB_SITE "http://sourceforge.net/projects/chesscup/"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
