@@ -1,15 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<SkyUpdater version="1.0.1.60">
-	<Version></Version>
-	<Application></Application>
+<SkyUpdater version="1.0.1.61">
+	<Version>0.0.0.12</Version>
+	<Application>ChessCup</Application>
 	<Files>
 		<File>
-			<URL></URL>
-			<Path></Path>
-			<File>
-				<URL>https://chesscup.googlecode.com/svn/trunk/release/license.txt</URL>
-				<Path>license.txt</Path>
-			</File>
+			<URL>https://chesscup.googlecode.com/svn/trunk/release/ChessCup.exe</URL>
+			<Path>ChessCup.exe</Path>
+		</File>
+		<File>
+			<URL>https://chesscup.googlecode.com/svn/trunk/release/skylib.Tools.dll</URL>
+			<Path>skylib.Tools.dll</Path>
+		</File>
+		<File>
+			<URL>https://chesscup.googlecode.com/svn/trunk/release/license.txt</URL>
+			<Path>license.txt</Path>
 		</File>
 	</Files>
 </SkyUpdater>
