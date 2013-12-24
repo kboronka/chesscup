@@ -16,7 +16,7 @@
 using System;
 using System.Windows.Forms;
 
-using skylib.Tools;
+using sar.Tools;
 
 namespace ChessCup
 {
