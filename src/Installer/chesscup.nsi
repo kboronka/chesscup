@@ -1,4 +1,4 @@
-﻿Name "ChessCup"
+Name "ChessCup"
 
 !define ROOT_PATH "..\.."
 !define SOURCE_PATH "${ROOT_PATH}\src\ChessCup"
@@ -232,7 +232,8 @@ Section "ChessCup" InSTSSection
 
    File "${SOURCE_PATH}\bin\${BUILDTYPE}\ChessCup.exe"
    File "${ROOT_PATH}\license.txt"
-   File "${SOURCE_PATH}\bin\${BUILDTYPE}\skylib.tools.dll"   
+   File "${SOURCE_PATH}\bin\${BUILDTYPE}\sar.exe"
+   File "${SOURCE_PATH}\bin\${BUILDTYPE}\sarControls.dll"
    File "${ART_PATH}\ChessCup.ico"
    
    IfErrors Error
