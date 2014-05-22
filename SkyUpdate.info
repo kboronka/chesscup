@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<SkyUpdater version="1.0.1.95">
-	<Version>0.1.0.8</Version>
+<SkyUpdater version="1.0.1.193">
+	<Version>0.1.0.9</Version>
 	<Application>ChessCup</Application>
 	<Files>
 		<File>
@@ -8,8 +8,12 @@
 			<Path>ChessCup.exe</Path>
 		</File>
 		<File>
-			<URL>https://chesscup.googlecode.com/svn/trunk/release/skylib.Tools.dll</URL>
-			<Path>skylib.Tools.dll</Path>
+			<URL>https://chesscup.googlecode.com/svn/trunk/release/sar.exe</URL>
+			<Path>sar.exe</Path>
+		</File>
+		<File>
+			<URL>https://chesscup.googlecode.com/svn/trunk/release/sarControls.dll</URL>
+			<Path>sarControls.dll</Path>
 		</File>
 		<File>
 			<URL>https://chesscup.googlecode.com/svn/trunk/release/license.txt</URL>
