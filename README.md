@@ -1,5 +1,5 @@
 # ChessCup
-a bad chess player
+a bad chess player, code is bad, learning to c#
 
 setting up the build enviorment:
 - [Microsoft.NET v2.0.50727](http://www.microsoft.com/download/en/details.aspx?id=19)
